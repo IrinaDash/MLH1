@@ -2,14 +2,17 @@ const sel = require('../../data/selectors.json');
 const exp = require('../../data/expected.json');
 
 describe('My Little Hero', function () {
+    before(()=> {
+        browser.maximizeWindow();
+        browser.deleteAllCookies();
+    });
 
     describe('Getting to the page', function () {
 
         it('TC-001 Title is correct ', function () {
             browser.url('https://qa-apps.netlify.app/app_my_hero');
-            browser.maximizeWindow();
-            browser.deleteAllCookies();
-            browser.delete
+            // browser.maximizeWindow();
+            // browser.deleteAllCookies();
             let title = browser.getTitle();
             expect(title).toEqual('MLH trial');
         });
@@ -95,7 +98,6 @@ describe('My Little Hero', function () {
 
     });
 
-
     describe('Labels are correct', function () {
         it("##### Label for HEADER = My Little Hero", function () {
             const text = $(sel.header).getText();
@@ -172,13 +174,13 @@ describe('My Little Hero', function () {
         it.skip('TC-0011 Label for upload an image name = 5. Upload an image (optional).', function () {
             expect($$(sel.label)[4].getText()).toEqual(exp.labelImage);
         });
-        it.skip('##### Text in field click or drag and drop = Click or drag and drop', function () {
+        it('##### Text in field click or drag and drop = Click or drag and drop', function () {
             expect($(sel.dragAndDropField).getText()).toEqual(exp.textInDragAndDrop);
         });
 
     });
 
-    describe("Verify Story tape names in dropdown menu ", function () {
+    describe("VERIFY STORY TAPE NAMES IN DROPDOWN MENU", function () {
         before(()=> {
             $(sel.dropdownSelections).click();
         })
@@ -186,14 +188,11 @@ describe('My Little Hero', function () {
         //     $(sel.dropdownSelections).click();
         // });
         it('##### Verify that type of story contains =  Overcoming the Monster', function () {
-          //  $(sel.dropdownSelections).click();
             expect($$(sel.dropdownStory)[0].getText()).toEqual(exp.story1);
         });
-
         it('##### Verify that type of story contains =  Rebirth', function () {
             expect($$(sel.dropdownStory)[1].getText()).toEqual(exp.story2);
         });
-
         it('##### Verify that type of story contains =  Quest', function () {
             expect($$(sel.dropdownStory)[2].getText()).toEqual(exp.story3);
         });
@@ -209,10 +208,6 @@ describe('My Little Hero', function () {
         it('##### Verify that type of story contains =  Comedy', function () {
             expect($$(sel.dropdownStory)[6].getText()).toEqual(exp.story7);
         });
-
-
-    }
-)
-
+    });
 
 });
